@@ -10,7 +10,7 @@ class BulletChatSpiderO(BulletChatSpider):
         super(BulletChatSpiderO, self).__init__(bvid)
 
 
-    def bulletChat(self) -> tuple:
+    def bulletChat(self) -> map:
         '''方法重构'''
         self.api = self.api % self.oid
         response = requests.get(self.api, headers=self.headers)
@@ -23,9 +23,7 @@ class BulletChatSpiderO(BulletChatSpider):
         elements_d = root.getElementsByTagName("d")
         # 获得内容
         # print(elements_d[0].getAttribute("p")) # p属性
-        return tuple(
-            map(lambda d: d.firstChild.nodeValue, elements_d)
-        )
+        return map(lambda d: d.firstChild.nodeValue, elements_d)
     
 
 if __name__ == "__main__":
