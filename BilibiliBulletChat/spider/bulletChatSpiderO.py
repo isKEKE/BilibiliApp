@@ -11,6 +11,7 @@ class BulletChatSpiderO(BulletChatSpider):
 
 
     def bulletChat(self) -> tuple:
+        '''方法重构'''
         self.api = self.api % self.oid
         response = requests.get(self.api, headers=self.headers)
         response.encoding = "utf-8"
@@ -25,14 +26,7 @@ class BulletChatSpiderO(BulletChatSpider):
         return tuple(
             map(lambda d: d.firstChild.nodeValue, elements_d)
         )
-
-
-    def loop(self) -> None:
-        '''方法重构'''
-        self.oid, self.pid = self.getOidAndPid()
-        self.datas = self.bulletChat()
-        self.save()
-        return
+    
 
 if __name__ == "__main__":
     BulletChatSpiderO("BV19v411M7Rs").loop()
